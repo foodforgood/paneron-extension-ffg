@@ -85,13 +85,14 @@ function () {
       <div css={css`
           background: ${Colors.LIGHT_GRAY2};
           position: absolute; inset: 0;
-          overflow: visible; padding: 10px;
+          overflow: hidden;
           display: flex; flex-flow: row nowrap;`}>
 
-        <div css={css`flex: 1; display: flex; flex-flow: column nowrap;`}>
+        <div css={css`flex: 1; padding: 10px; display: flex; flex-flow: column nowrap; overflow: hidden;`}>
           <Breadcrumbs
-            css={css`flex: 0; margin-bottom: 10px;`}
+            css={css`flex: 0; margin-bottom: 10px; white-space: nowrap;`}
             items={breadcrumbItems} />
+
           {state.entrySlug
             ? <EntryForm
                 categoryID={state.categoryID}
@@ -100,7 +101,7 @@ function () {
                   type: 'select-language',
                   payload: { id: langID },
                 })}
-                css={css`flex: 1;`}
+                css={css`flex: 1; overflow: hidden;`}
               />
             : <CategoryDashboard
                 categoryID={state.categoryID}
@@ -114,18 +115,21 @@ function () {
 
         {state.entrySlug
           ? <Button
-              large
               icon="cross"
               title="Close (lose uncommitted changes)"
-              css={css`position: absolute; top: 10px; right: 10px;`}
+              css={css`position: absolute; top: 5px; right: 10px;`}
               onClick={() => dispatch({
                 type: 'select-entry',
                 payload: { slug: null },
               })}
             />
           : <nav css={css`flex: 0; margin-left: 10px;`}>
-              <Menu className={Classes.ELEVATION_1}>
+              <Menu
+                  className={Classes.ELEVATION_1}
+                  css={css`width: 25vw; .bp3-menu-item-label { line-height: 1; }`}>
+
                 <MenuDivider title="Sections" />
+
                 {categories.map(catID =>
                   <MenuItem
                     icon={state.categoryID === catID ? 'folder-open' : 'folder-close'}

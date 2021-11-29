@@ -4,6 +4,7 @@
 import React from 'react';
 import ADocProcessor from 'asciidoctor';
 import { jsx } from '@emotion/react';
+import { Classes } from '@blueprintjs/core';
 
 
 const adoc = ADocProcessor();
@@ -14,7 +15,7 @@ function ({ data, className }) {
   return (
     <div
       dangerouslySetInnerHTML={{ __html: adoc.convert(data, { backend: 'html5' }) as string }}
-      className={className}
+      className={`${Classes.RUNNING_TEXT} ${className}`}
     />
   );
 }

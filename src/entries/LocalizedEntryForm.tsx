@@ -51,7 +51,7 @@ const LocalizedEntryForm: React.FC<{
         />
       </FormGroup>
 
-      <FormGroup>
+      <FormGroup helperText="Once published and committed, you cannot unpublish a post here.">
         <ButtonGroup>
           <Button
               small
@@ -81,10 +81,12 @@ const LocalizedEntryForm: React.FC<{
         </ButtonGroup>
       </FormGroup>
 
-      <FormGroup helperText="Please write AsciiDoc, and preview on the right." css={css`flex: 1; position: relative;`}>
+      <FormGroup
+          helperText="Please write AsciiDoc, and preview on the right."
+          css={css`flex: 1; position: relative; .bp3-form-content { flex: 1; }`}>
         <TextArea
           fill
-          css={css`position: absolute; inset: 0;`}
+          css={css`height: 90% !important; margin: 0;`}
           placeholder={onCommit ? "Please write some contents…" : "(there is no contents)"}
           value={data.body ?? ''}
           readOnly={!onCommit}
@@ -101,6 +103,7 @@ const LocalizedEntryForm: React.FC<{
       <Button
           intent={canCommit ? 'success' : undefined}
           disabled={!canCommit}
+          css={css`border-radius: 0;`}
           onClick={onCommit && editedData
             ? () => onCommit!(editedData)
             : undefined}>
@@ -113,6 +116,7 @@ const LocalizedEntryForm: React.FC<{
 
 const FormGroup = styled(BaseFormGroup)`
   margin-bottom: 5px;
+  padding: 0 10px;
 `
 
 

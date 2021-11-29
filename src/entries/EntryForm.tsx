@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { Button, Colors, NonIdealState, Tab, Tabs } from '@blueprintjs/core';
+import { Button, Card, Colors, NonIdealState, Tab, Tabs } from '@blueprintjs/core';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 
@@ -73,14 +73,14 @@ const EntryForm: React.VoidFunctionComponent<{
 
   if (entryDataResp.value !== null) {
     return (
-      <div className={className} css={css`display: flex; flex-flow: row nowrap;`}>
+      <Card className={className} css={css`padding: 0; display: flex; flex-flow: row nowrap;`}>
         <Tabs
             renderActiveTabPanelOnly
             selectedTabId={selectedTabID}
             onChange={(tabID: string, oldTabID: string) =>
               selectTab(isValidTabID(tabID) ? tabID : langCtx.selected)}
             css={css`
-              margin-right: 10px;
+              width: 50%;
 
               flex: 1;
               display: flex;
@@ -89,9 +89,9 @@ const EntryForm: React.VoidFunctionComponent<{
 
               .bp3-tab-list {
                 overflow-x: auto;
-                height: 24px;
+                padding: 10px;
+                height: auto;
                 position: unset;
-                margin-bottom: 10px;
 
                 /* Accommodate the new tab button on the right */
                 display: block;
@@ -160,19 +160,20 @@ const EntryForm: React.VoidFunctionComponent<{
 
         {selectedTabID === 'illustrations' && selectedIllustration
           ? <IllustrationPreview
-              css={css`flex: 1; padding: 10px; background: ${Colors.LIGHT_GRAY4};`}
               objectPath={selectedIllustration}
+              css={css`flex: 1; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
             />
-          : null}
-
-        {selectedTabID !== 'illustrations'
+          : selectedTabID !== 'illustrations'
           ? <AsciidocPreview
               data={asciidocPreview ?? entryDataResp.value[selectedTabID]?.body ?? '(Nothing to preview)'}
-              css={css`flex: 1; padding: 10px; background: ${Colors.LIGHT_GRAY4};`}
+              css={css`flex: 1; overflow-y: auto; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
             />
-          : null}
+          : <NonIdealState
+              css={css`flex: 1; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
+              icon="star-empty"
+              title="Nothing to preview" />}
 
-      </div>
+      </Card>
     );
 
   } else {
@@ -188,5 +189,5 @@ export default EntryForm;
 
 
 const TabTitleButton = styled(Button)`
-  border-radius: 0;
+  margin-right: 5px;
 `;
