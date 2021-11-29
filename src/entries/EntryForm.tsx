@@ -160,8 +160,8 @@ const EntryForm: React.VoidFunctionComponent<{
 
         {selectedTabID === 'illustrations' && selectedIllustration
           ? <IllustrationPreview
-              relativePath={selectedIllustration}
               css={css`flex: 1; padding: 10px; background: ${Colors.LIGHT_GRAY4};`}
+              objectPath={selectedIllustration}
             />
           : null}
 
