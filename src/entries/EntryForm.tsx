@@ -114,27 +114,6 @@ const EntryForm: React.VoidFunctionComponent<{
               .bp3-tab-panel { flex: 1; margin: 0; position: relative; }
             `}
             id="entryFormTabs">
-          <Tab
-            id="illustrations"
-            title={
-              <TabTitleButton
-                active={selectedTabID === 'illustrations'}
-                intent={selectedTabID === 'illustrations' ? 'primary' : undefined}
-                small
-                icon="media"
-                css={css`position: absolute; top: 0; right: 0; z-index: 10;`}
-              >Illustrations</TabTitleButton>
-            }
-            panel={
-              <IllustrationList
-                css={css`position: absolute; inset: 0;`}
-                categoryID={categoryID}
-                entrySlug={entrySlug}
-                onSelect={selectIllustration}
-                selected={selectedIllustration}
-              />
-            }
-          />
           {languages.map(langID =>
             <Tab
               id={langID}
@@ -157,6 +136,26 @@ const EntryForm: React.VoidFunctionComponent<{
               }
             />
           )}
+          <Tab
+            id="illustrations"
+            title={
+              <TabTitleButton
+                active={selectedTabID === 'illustrations'}
+                intent={selectedTabID === 'illustrations' ? 'primary' : undefined}
+                small
+                icon="media"
+              >Illustrations</TabTitleButton>
+            }
+            panel={
+              <IllustrationList
+                css={css`position: absolute; inset: 0;`}
+                categoryID={categoryID}
+                entrySlug={entrySlug}
+                onSelect={selectIllustration}
+                selected={selectedIllustration}
+              />
+            }
+          />
         </Tabs>
 
         {selectedTabID === 'illustrations' && selectedIllustration
