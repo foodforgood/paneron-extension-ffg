@@ -3,21 +3,47 @@
 
 import React, { useContext } from 'react';
 import { jsx } from '@emotion/react';
+import { NonIdealState, Spinner } from '@blueprintjs/core';
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 
 
-const IllustrationPreview: React.VoidFunctionComponent<{ relativePath: string, className?: string }> =
-function ({ relativePath, className }) {
-  const { makeAbsolutePath } = useContext(DatasetContext);
-  const p = makeAbsolutePath(relativePath);
+const IllustrationPreview: React.VoidFunctionComponent<{ objectPath: string, className?: string }> =
+function ({ objectPath, className }) {
+  const { useObjectData } = useContext(DatasetContext);
+  const objDataResp = useObjectData({ objectPaths: [objectPath] });
 
-  return (
-    <img
-      src={`file://${p}`}
+  if (objDataResp.isUpdating) {
+    return <NonIdealState
       className={className}
-    />
-  );
+      icon={<Spinner />}
+      description="Retrieving file…"
+    />;
+  } else {
+    const base64string = objDataResp.value.data[objectPath]?.asBase64;
+    if (base64string) {
+      const mime = Object.entries(MIME_MAP).
+        find(([ext, ]) => objectPath.toLowerCase().endsWith(ext))?.[1] ?? 'image/jpeg';
+      const dataURL = `data:${mime};base64,${base64string}`;
+      return <img src={dataURL} className={className} />;
+    } else {
+      return <NonIdealState
+        className={className}
+        icon="heart-broken"
+        title="Failed to load file preview"
+        description="The error is: base64 string is missing."
+      />;
+    }
+  }
 }
+
+
+const MIME_MAP = {
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+  '.pdf': 'application/pdf',
+};
 
 
 export default IllustrationPreview;
