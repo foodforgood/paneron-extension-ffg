@@ -10,7 +10,7 @@ import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 const IllustrationPreview: React.VoidFunctionComponent<{ objectPath: string, className?: string }> =
 function ({ objectPath, className }) {
   const { useObjectData } = useContext(DatasetContext);
-  const objDataResp = useObjectData({ objectPaths: [objectPath] });
+  const objDataResp = useObjectData({ objectPaths: [objectPath], resolveLFS: true });
 
   if (objDataResp.isUpdating) {
     return <NonIdealState
