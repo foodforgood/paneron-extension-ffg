@@ -43,6 +43,7 @@ export const categories = [
 
 export type CategoryID = typeof categories[number];
 
+/** Important: the first language is treated as canonical. */
 export const languages = [ 'zh', 'en', 'cn' ] as  const;
 
 export type LanguageID = typeof languages[number];
