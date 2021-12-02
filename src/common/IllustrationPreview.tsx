@@ -2,7 +2,7 @@
 /** @jsxFrag React.Fragment */
 
 import React, { useContext } from 'react';
-import { jsx } from '@emotion/react';
+import { jsx, css } from '@emotion/react';
 import { NonIdealState, Spinner } from '@blueprintjs/core';
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 
@@ -24,7 +24,11 @@ function ({ objectPath, className }) {
       const mime = Object.entries(MIME_MAP).
         find(([ext, ]) => objectPath.toLowerCase().endsWith(ext))?.[1] ?? 'image/jpeg';
       const dataURL = `data:${mime};base64,${base64string}`;
-      return <img src={dataURL} className={className} />;
+      return <img
+        src={dataURL}
+        className={className}
+        css={css`object-fit: contain; overflow: hidden;`}
+      />;
     } else {
       return <NonIdealState
         className={className}

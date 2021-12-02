@@ -161,7 +161,7 @@ const EntryForm: React.VoidFunctionComponent<{
         {selectedTabID === 'illustrations' && selectedIllustration
           ? <IllustrationPreview
               objectPath={selectedIllustration}
-              css={css`flex: 1; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
+              css={css`flex: 1; padding: 10px; background: ${Colors.GRAY2}; color: ${Colors.LIGHT_GRAY5}`}
             />
           : selectedTabID !== 'illustrations'
           ? <AsciidocPreview
