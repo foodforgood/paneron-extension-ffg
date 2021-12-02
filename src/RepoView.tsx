@@ -156,6 +156,19 @@ function () {
                   />
                 )}
               </Menu>
+              <div css={css`margin-top: 5px;`}>
+                {languages.map(langID =>
+                  <Button
+                      css={css`margin-right: 5px;`}
+                      icon="translate"
+                      small
+                      active={langID === state.langID}
+                      intent={langID === state.langID ? 'primary' : undefined}
+                      onClick={() => handleSetLanguage(langID)}>
+                    {langID}
+                  </Button>
+                )}
+              </div>
             </nav>}
       </div>
     </LangContext.Provider>
