@@ -81,8 +81,9 @@ const EntryForm: React.VoidFunctionComponent<{
               selectTab(isValidTabID(tabID) ? tabID : langCtx.selected)}
             css={css`
               width: 50%;
+              flex-basis: 50%;
+              flex-shrink: 0;
 
-              flex: 1;
               display: flex;
               flex-flow: column nowrap;
               position: relative;
