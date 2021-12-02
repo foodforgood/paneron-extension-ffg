@@ -9,6 +9,7 @@ import styled from '@emotion/styled';
 
 import { Button, ButtonGroup, FormGroup as BaseFormGroup, InputGroup, TextArea } from '@blueprintjs/core';
 
+import ActionButton from '../common/ActionButton';
 import { BodyWithFrontmatter } from '../frontmatter';
 import { EntryFrontmatter } from '../typeconst';
 
@@ -100,15 +101,14 @@ const LocalizedEntryForm: React.FC<{
         />
       </FormGroup>
 
-      <Button
+      <ActionButton
           intent={canCommit ? 'success' : undefined}
           disabled={!canCommit}
-          css={css`border-radius: 0;`}
           onClick={onCommit && editedData
             ? () => onCommit!(editedData)
             : undefined}>
         Commit changes
-      </Button>
+      </ActionButton>
     </div>
   );
 }
