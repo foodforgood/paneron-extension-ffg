@@ -16,16 +16,19 @@ import { EntryFrontmatter } from '../typeconst';
 
 const LocalizedEntryForm: React.FC<{
   objectData: BodyWithFrontmatter<EntryFrontmatter>
+  creating?: true
   onCommit?: (dataToBeCommitted: BodyWithFrontmatter<EntryFrontmatter>) => void
   onChange?: (changedData: BodyWithFrontmatter<EntryFrontmatter> | null) => void
   className?: string
-}> = function ({ objectData, onCommit, onChange, className }) {
+}> = function ({ objectData, creating, onCommit, onChange, className }) {
   const [editedData, setEdited] =
     useState<BodyWithFrontmatter<EntryFrontmatter> | null>(null);
 
   const data = editedData ?? objectData;
 
   const published = data.frontmatter.published === true;
+  const canUnpublish = !objectData.frontmatter.published; // Note that we reference the preexisting object data
+  const canPublish = !creating;
 
   const canCommit = editedData !== null && JSON.stringify(objectData) !== JSON.stringify(editedData);
 
@@ -35,7 +38,7 @@ const LocalizedEntryForm: React.FC<{
 
   return (
     <div className={className} css={css`display: flex; flex-flow: column nowrap;`}>
-      <FormGroup>
+      <FormGroup css={css`margin-top: 5px;`}>
         <InputGroup
           placeholder={onCommit ? "Please write a title…" : "(there is no title)"}
           readOnly={!onCommit}
@@ -63,7 +66,7 @@ const LocalizedEntryForm: React.FC<{
                   $unset: ['published'],
                 },
               }))}
-              disabled={objectData.frontmatter.published}>
+              disabled={!canUnpublish}>
             Unpublished
           </Button>
           <Button
@@ -76,7 +79,8 @@ const LocalizedEntryForm: React.FC<{
                     $set: true,
                   },
                 },
-              }))}>
+              }))}
+              disabled={!canPublish}>
             Published
           </Button>
         </ButtonGroup>

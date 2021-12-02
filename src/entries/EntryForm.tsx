@@ -52,121 +52,125 @@ const EntryForm: React.VoidFunctionComponent<{
     lang: LanguageID,
     data: BodyWithFrontmatter<EntryFrontmatter>,
   ) {
-    if (updateObjects && entryDataResp.value) {
+    if (updateObjects) {
       const objectPath = `/${categoryID}/${entrySlug}/main-${lang}.adoc`;
       await updateObjects({
         objectChangeset: {
           [objectPath]: {
             newValue: { asText: fm.serialize(data) },
-            oldValue: undefined,
+            oldValue: creating ? null : undefined,
           },
         },
-        _dangerouslySkipValidation: true,
+        _dangerouslySkipValidation: creating ? undefined : true,
         commitMessage: `edit ${entrySlug} (${lang})`,
       });
       setAsciidocPreview(null);
     } else {
-      throw new Error("Either access is read-only, or specified entry doesn’t exist");
+      throw new Error("Access is read-only");
     }
   }
   const handleCommitPostChange = performOperation('updating post', _handleCommitPostChange);
 
-  if (entryDataResp.value !== null) {
-    return (
-      <Card className={className} css={css`padding: 0; display: flex; flex-flow: row nowrap;`}>
-        <Tabs
-            renderActiveTabPanelOnly
-            selectedTabId={selectedTabID}
-            onChange={(tabID: string, oldTabID: string) =>
-              selectTab(isValidTabID(tabID) ? tabID : langCtx.selected)}
-            css={css`
-              width: 50%;
-              flex-basis: 50%;
-              flex-shrink: 0;
+  const creating = entryDataResp.value === null;
 
-              display: flex;
-              flex-flow: column nowrap;
-              position: relative;
+  return (
+    <Card className={className} css={css`padding: 0; display: flex; flex-flow: row nowrap;`}>
+      <Tabs
+          renderActiveTabPanelOnly
+          selectedTabId={selectedTabID}
+          onChange={(tabID: string, oldTabID: string) =>
+            selectTab(isValidTabID(tabID) ? tabID : langCtx.selected)}
+          css={css`
+            width: 50%;
+            flex-basis: 50%;
+            flex-shrink: 0;
 
-              .bp3-tab-list {
-                overflow-x: auto;
-                padding: 10px;
-                height: auto;
-                position: unset;
+            display: flex;
+            flex-flow: column nowrap;
+            position: relative;
 
-                /* Accommodate the new tab button on the right */
-                display: block;
-                white-space: nowrap;
-                padding-right: 24px;
+            .bp3-tab-list {
+              overflow-x: auto;
+              padding: 10px;
+              height: auto;
+              position: unset;
 
-                /* Remove spacing between tabs */
-                > *:not(:last-child) {
-                  margin-right: 0;
-                }
+              /* Accommodate the new tab button on the right */
+              display: block;
+              white-space: nowrap;
+              padding-right: 24px;
 
-                /* Hide horizontal scrollbar (overlaps with tab titles on macOS) */
-                ::-webkit-scrollbar {
-                  height: 0px;
-                  background: transparent;
-                }
+              /* Remove spacing between tabs */
+              > *:not(:last-child) {
+                margin-right: 0;
               }
-              .bp3-tab-indicator { display: none; }
-              .bp3-tab { line-height: unset; position: unset; display: inline-block; }
-              .bp3-tab-panel { flex: 1; margin: 0; position: relative; }
-            `}
-            id="entryFormTabs">
-          {languages.map(langID =>
-            <Tab
-              id={langID}
-              key={langID}
-              title={
-                <TabTitleButton
-                  active={selectedTabID === langID}
-                  intent={selectedTabID === langID ? 'primary' : undefined}
-                  small
-                  icon="translate"
-                >{langID}</TabTitleButton>
+
+              /* Hide horizontal scrollbar (overlaps with tab titles on macOS) */
+              ::-webkit-scrollbar {
+                height: 0px;
+                background: transparent;
               }
-              panel={
-                <LocalizedEntryForm
-                  css={css`position: absolute; inset: 0; overflow-y: auto;`}
-                  objectData={entryDataResp.value?.[langID] ?? { frontmatter: {}, body: '' }}
-                  onCommit={newData => handleCommitPostChange(langID, newData)}
-                  onChange={newData => setAsciidocPreview(newData?.body ?? null)}
-                />
-              }
-            />
-          )}
+            }
+            .bp3-tab-indicator { display: none; }
+            .bp3-tab { line-height: unset; position: unset; display: inline-block; }
+            .bp3-tab-panel { flex: 1; margin: 0; position: relative; }
+          `}
+          id="entryFormTabs">
+        {languages.map(langID =>
           <Tab
-            id="illustrations"
+            id={langID}
+            key={langID}
             title={
               <TabTitleButton
-                active={selectedTabID === 'illustrations'}
-                intent={selectedTabID === 'illustrations' ? 'primary' : undefined}
+                active={selectedTabID === langID}
+                intent={selectedTabID === langID ? 'primary' : undefined}
+                disabled={creating && langID !== languages[0]}
                 small
-                icon="media"
-              >Illustrations</TabTitleButton>
+                icon="translate"
+              >{langID}</TabTitleButton>
             }
             panel={
-              <IllustrationList
-                css={css`position: absolute; inset: 0;`}
-                categoryID={categoryID}
-                entrySlug={entrySlug}
-                onSelect={selectIllustration}
-                selected={selectedIllustration}
+              <LocalizedEntryForm
+                css={css`position: absolute; inset: 0; overflow-y: auto;`}
+                creating={creating ? true : undefined}
+                objectData={entryDataResp.value?.[langID] ?? { frontmatter: {}, body: '' }}
+                onCommit={newData => handleCommitPostChange(langID, newData)}
+                onChange={newData => setAsciidocPreview(newData?.body ?? null)}
               />
             }
           />
-        </Tabs>
-
-        {selectedTabID === 'illustrations' && selectedIllustration
-          ? <IllustrationPreview
-              objectPath={selectedIllustration}
-              css={css`flex: 1; padding: 10px; background: ${Colors.GRAY2}; color: ${Colors.LIGHT_GRAY5}`}
+        )}
+        <Tab
+          id="illustrations"
+          title={
+            <TabTitleButton
+              active={selectedTabID === 'illustrations'}
+              intent={selectedTabID === 'illustrations' ? 'primary' : undefined}
+              disabled={creating}
+              small
+              icon="media"
+            >Illustrations</TabTitleButton>
+          }
+          panel={
+            <IllustrationList
+              css={css`position: absolute; inset: 0;`}
+              categoryID={categoryID}
+              entrySlug={entrySlug}
+              onSelect={selectIllustration}
+              selected={selectedIllustration}
             />
-          : selectedTabID !== 'illustrations'
+          }
+        />
+      </Tabs>
+
+      {selectedTabID === 'illustrations' && selectedIllustration
+        ? <IllustrationPreview
+            objectPath={selectedIllustration}
+            css={css`flex: 1; padding: 10px; background: ${Colors.GRAY2}; color: ${Colors.LIGHT_GRAY5}`}
+          />
+        : selectedTabID !== 'illustrations'
           ? <AsciidocPreview
-              data={asciidocPreview ?? entryDataResp.value[selectedTabID]?.body ?? '(Nothing to preview)'}
+              data={asciidocPreview ?? entryDataResp.value?.[selectedTabID]?.body ?? '(Nothing to preview)'}
               css={css`flex: 1; overflow-y: auto; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
             />
           : <NonIdealState
@@ -174,16 +178,8 @@ const EntryForm: React.VoidFunctionComponent<{
               icon="star-empty"
               title="Nothing to preview" />}
 
-      </Card>
-    );
-
-  } else {
-    return <NonIdealState
-      className={className}
-      icon="heart-broken"
-      title="Post not found"
-    />;
-  }
+    </Card>
+  );
 }
 
 export default EntryForm;

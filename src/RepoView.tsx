@@ -69,6 +69,13 @@ function () {
     },
     null);
 
+  function handleSetLanguage(langID: LanguageID) {
+    dispatch({
+      type: 'select-language',
+      payload: { id: langID },
+    });
+  }
+
   const breadcrumbItems: BreadcrumbProps[] = [
     { icon: 'folder-open', text: state.categoryID },
   ];
@@ -97,14 +104,12 @@ function () {
             ? <EntryForm
                 categoryID={state.categoryID}
                 entrySlug={state.entrySlug}
-                onChangeLanguage={langID => dispatch({
-                  type: 'select-language',
-                  payload: { id: langID },
-                })}
+                onChangeLanguage={handleSetLanguage}
                 css={css`flex: 1; overflow: hidden;`}
               />
             : <CategoryDashboard
                 categoryID={state.categoryID}
+                onChangeLanguage={handleSetLanguage}
                 onOpenEntry={slug => dispatch({
                   type: 'select-entry',
                   payload: { slug },
