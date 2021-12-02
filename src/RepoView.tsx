@@ -123,7 +123,7 @@ function () {
                 payload: { slug: null },
               })}
             />
-          : <nav css={css`flex: 0; margin-left: 10px;`}>
+          : <nav css={css`flex: 0; padding: 10px;`}>
               <Menu
                   className={Classes.ELEVATION_1}
                   css={css`width: 25vw; .bp3-menu-item-label { line-height: 1; }`}>
