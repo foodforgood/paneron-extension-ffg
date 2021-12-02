@@ -83,7 +83,7 @@ const LocalizedEntryForm: React.FC<{
       </FormGroup>
 
       <FormGroup
-          helperText="Please write AsciiDoc, and preview on the right."
+          helperText="You can use AsciiDoc formatting. Formatting can be previewed on the right."
           css={css`flex: 1; position: relative; .bp3-form-content { flex: 1; }`}>
         <TextArea
           fill
