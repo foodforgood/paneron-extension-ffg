@@ -1075,10 +1075,10 @@
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"
   integrity sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==
 
-"@riboseinc/paneron-extension-kit@2.0.0-alpha23":
-  version "2.0.0-alpha23"
-  resolved "https://registry.yarnpkg.com/@riboseinc/paneron-extension-kit/-/paneron-extension-kit-2.0.0-alpha23.tgz#2a454a2e17b9a4b7a1037fd4eb42f7beab6a5bd8"
-  integrity sha512-QJCvwFTND5ntqVwog4eFlb8U2vvktcQVvAoNz2GwW8dNfu/YgGJ83kn3uQcLU9Ry5Wi6WEsAWVDjya56sB9ycg==
+"@riboseinc/paneron-extension-kit@2.0.0-alpha24":
+  version "2.0.0-alpha24"
+  resolved "https://registry.yarnpkg.com/@riboseinc/paneron-extension-kit/-/paneron-extension-kit-2.0.0-alpha24.tgz#1fb6f05fd8fc70cd6dbbc24fb4cf8b19afc6adc1"
+  integrity sha512-cJTvgur1W7sgO/MGYZCutZ6S2keP15tyQSi6XI47ZJaiPSEV/IWkEHy78D7j/aO4VQkIlVpWG0A+kYdbzBApRw==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"

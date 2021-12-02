@@ -34,7 +34,7 @@
     "@blueprintjs/icons": "^3.29.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@riboseinc/paneron-extension-kit": "2.0.0-alpha23",
+    "@riboseinc/paneron-extension-kit": "2.0.0-alpha24",
     "@types/js-yaml": "^4.0.1",
     "@types/node": "^16.11.7",
     "@types/react": "^16.9.11",
