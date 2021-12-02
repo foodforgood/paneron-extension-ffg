@@ -41,6 +41,6 @@ export default {
   },
   serialize: ({ body, frontmatter }: BodyWithFrontmatter): string => {
     const rawFrontmatter = yaml.dump(frontmatter);
-    return ['', rawFrontmatter, body].join('---');
+    return ['', `\n${rawFrontmatter}\n`, `\n${body}`].join('---');
   },
 }
