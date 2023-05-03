@@ -42,8 +42,6 @@
     "@types/webpack-env": "^1.16.0",
     "asciidoctor": "^2.2.5",
     "date-fns": "2.22.1",
-    "electron": "^12.2.2",
-    "electron-log": "^4.3.0",
     "immutability-helper": "3.1.1",
     "js-yaml": "4.1.0",
     "liquidjs": "^9.25.0",
