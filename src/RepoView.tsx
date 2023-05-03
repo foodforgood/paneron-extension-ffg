@@ -131,7 +131,7 @@ function () {
           : <nav css={css`flex: 0; padding: 10px;`}>
               <Menu
                   className={Classes.ELEVATION_1}
-                  css={css`width: 25vw; .bp3-menu-item-label { line-height: 1; }`}>
+                  css={css`width: 25vw; .bp4-menu-item-label { line-height: 1; }`}>
 
                 <MenuDivider title="Sections" />
 

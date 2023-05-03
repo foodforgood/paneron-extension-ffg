@@ -4,5 +4,5 @@ import 'electron';
 export default makeExtension({
   mainView: () => import('./RepoView'),
   name: "Food For Good",
-  requiredHostAppVersion: '^1.0.0-beta23',
+  requiredHostAppVersion: '^2.0.0',
 });

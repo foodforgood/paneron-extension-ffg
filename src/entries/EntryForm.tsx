@@ -89,7 +89,7 @@ const EntryForm: React.VoidFunctionComponent<{
             flex-flow: column nowrap;
             position: relative;
 
-            .bp3-tab-list {
+            .bp4-tab-list {
               overflow-x: auto;
               padding: 10px;
               height: auto;
@@ -111,9 +111,9 @@ const EntryForm: React.VoidFunctionComponent<{
                 background: transparent;
               }
             }
-            .bp3-tab-indicator { display: none; }
-            .bp3-tab { line-height: unset; position: unset; display: inline-block; }
-            .bp3-tab-panel { flex: 1; margin: 0; position: relative; }
+            .bp4-tab-indicator { display: none; }
+            .bp4-tab { line-height: unset; position: unset; display: inline-block; }
+            .bp4-tab-panel { flex: 1; margin: 0; position: relative; }
           `}
           id="entryFormTabs">
         {languages.map(langID =>
