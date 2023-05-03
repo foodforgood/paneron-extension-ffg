@@ -1,0 +1,14 @@
+Extension for managigng Food For Good site content.
+
+== Known issues
+
+- Asciidoctor may rely on Node environment,
+  and may not work in browser
+- Dark mode is not supported yet
+
+== Building
+
+Note that TS can throw errors about Buffer type during build,
+this is becuase Asciidoctor library relies on NodeJS apparently.
+
+However, this doesn’t cause issues considering the scope of extension’s functionality.
