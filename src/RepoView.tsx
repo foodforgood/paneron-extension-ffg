@@ -4,7 +4,8 @@
 import React, { useContext } from 'react';
 import { jsx, css } from '@emotion/react';
 
-import { BreadcrumbProps, Breadcrumbs, Button, Classes, Colors, Menu, MenuDivider, MenuItem } from '@blueprintjs/core';
+import { BreadcrumbProps, Button, Classes, Colors, Menu, MenuDivider, MenuItem } from '@blueprintjs/core';
+import { Breadcrumbs2 as Breadcrumbs } from '@blueprintjs/popover2';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 import { PersistentStateReducerHook } from '@riboseinc/paneron-extension-kit/usePersistentStateReducer';
