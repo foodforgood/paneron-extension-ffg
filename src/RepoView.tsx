@@ -78,7 +78,13 @@ function () {
   }
 
   const breadcrumbItems: BreadcrumbProps[] = [
-    { icon: 'folder-open', text: state.categoryID },
+    {
+      icon: 'folder-open',
+      text: state.categoryID,
+      onClick: state.entrySlug
+        ? () => dispatch({ type: 'select-entry', payload: { slug: null } })
+        : undefined,
+    },
   ];
 
   if (state.entrySlug) {
