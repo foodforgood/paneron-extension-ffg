@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useCallback } from 'react';
 import { jsx, css } from '@emotion/react';
 
 import { BreadcrumbProps, Button, Classes, Colors, Menu, MenuDivider, MenuItem } from '@blueprintjs/core';
@@ -70,12 +70,12 @@ function () {
     },
     null);
 
-  function handleSetLanguage(langID: LanguageID) {
+  const handleSetLanguage = useCallback(function _handleSetLanguage(langID: LanguageID) {
     dispatch({
       type: 'select-language',
       payload: { id: langID },
     });
-  }
+  }, []);
 
   const breadcrumbItems: BreadcrumbProps[] = [
     {
@@ -93,6 +93,56 @@ function () {
       text: state.entrySlug,
     })
   }
+
+  const nav = useMemo(
+    (() =>
+      !state.entrySlug
+        ? <nav css={css`flex: 0; padding: 10px;`}>
+            <Menu
+                className={Classes.ELEVATION_1}
+                css={css`width: 25vw; .bp4-menu-item-label { line-height: 1; }`}>
+
+              <MenuDivider title="Sections" />
+
+              {categories.map(catID =>
+                <MenuItem
+                  icon={state.categoryID === catID ? 'folder-open' : 'folder-close'}
+                  key={catID}
+                  text={catID}
+                  labelElement={
+                    <EntryCount
+                      categoryID={catID}
+                      drafts
+                      nonZeroOnly
+                      nonZeroIntent="warning"
+                    />
+                  }
+                  active={state.categoryID === catID}
+                  onClick={() => dispatch({
+                    type: 'select-category',
+                    payload: { id: catID },
+                  })}
+                />
+              )}
+            </Menu>
+            <div css={css`margin-top: 5px;`}>
+              {languages.map(langID =>
+                <Button
+                    css={css`margin-right: 5px;`}
+                    icon="translate"
+                    small
+                    active={langID === state.langID}
+                    intent={langID === state.langID ? 'primary' : undefined}
+                    onClick={() => handleSetLanguage(langID)}>
+                  {langID}
+                </Button>
+              )}
+            </div>
+          </nav>
+        : null
+    ),
+    [state.categoryID, state.entrySlug, handleSetLanguage, categories],
+  );
 
   return (
     <LangContext.Provider value={{ selected: state.langID }}>
@@ -130,58 +180,8 @@ function () {
               />}
         </div>
 
-        {state.entrySlug
-          ? <Button
-              icon="cross"
-              title="Close (lose uncommitted changes)"
-              css={css`position: absolute; top: 5px; right: 10px;`}
-              onClick={() => dispatch({
-                type: 'select-entry',
-                payload: { slug: null },
-              })}
-            />
-          : <nav css={css`flex: 0; padding: 10px;`}>
-              <Menu
-                  className={Classes.ELEVATION_1}
-                  css={css`width: 25vw; .bp4-menu-item-label { line-height: 1; }`}>
+        {nav}
 
-                <MenuDivider title="Sections" />
-
-                {categories.map(catID =>
-                  <MenuItem
-                    icon={state.categoryID === catID ? 'folder-open' : 'folder-close'}
-                    key={catID}
-                    text={catID}
-                    labelElement={
-                      <EntryCount
-                        categoryID={catID}
-                        drafts
-                        nonZeroOnly
-                        nonZeroIntent="warning"
-                      />
-                    }
-                    active={state.categoryID === catID}
-                    onClick={() => dispatch({
-                      type: 'select-category',
-                      payload: { id: catID },
-                    })}
-                  />
-                )}
-              </Menu>
-              <div css={css`margin-top: 5px;`}>
-                {languages.map(langID =>
-                  <Button
-                      css={css`margin-right: 5px;`}
-                      icon="translate"
-                      small
-                      active={langID === state.langID}
-                      intent={langID === state.langID ? 'primary' : undefined}
-                      onClick={() => handleSetLanguage(langID)}>
-                    {langID}
-                  </Button>
-                )}
-              </div>
-            </nav>}
       </div>
     </LangContext.Provider>
   );
