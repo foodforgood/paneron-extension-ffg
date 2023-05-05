@@ -199,7 +199,7 @@ const EntryForm: React.VoidFunctionComponent<{
                   background: ${Colors.DARK_GRAY4};
                 }
               `}
-              wcon="star-empty"
+              icon="star-empty"
               title="Nothing to preview" />}
 
     </Card>
