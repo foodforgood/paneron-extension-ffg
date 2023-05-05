@@ -9,7 +9,7 @@ import { BreadcrumbProps, Breadcrumbs, Button, Classes, Colors, Menu, MenuDivide
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 import { PersistentStateReducerHook } from '@riboseinc/paneron-extension-kit/usePersistentStateReducer';
 
-import { categories, LanguageID, languages } from './typeconst';
+import { categories, type LanguageID, languages } from './typeconst';
 import EntryCount from './entries/EntryCount';
 import CategoryDashboard from './CategoryDashboard';
 import EntryForm from './entries/EntryForm';

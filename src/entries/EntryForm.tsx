@@ -14,7 +14,7 @@ import LangContext from '../LangContext';
 import IllustrationPreview from '../common/IllustrationPreview';
 import AsciidocPreview from '../common/AsciidocPreview';
 import useEntryData from '../useEntryData';
-import { EntryFrontmatter, LanguageID, languages } from '../typeconst';
+import { EntryFrontmatter, type LanguageID, languages } from '../typeconst';
 import LocalizedEntryForm from './LocalizedEntryForm';
 import IllustrationList from './IllustrationList';
 
