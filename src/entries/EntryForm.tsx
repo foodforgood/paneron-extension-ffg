@@ -166,16 +166,40 @@ const EntryForm: React.VoidFunctionComponent<{
       {selectedTabID === 'illustrations' && selectedIllustration
         ? <IllustrationPreview
             objectPath={selectedIllustration}
-            css={css`flex: 1; padding: 10px; background: ${Colors.GRAY2}; color: ${Colors.LIGHT_GRAY5}`}
+            css={css`
+              flex: 1;
+              padding: 10px;
+              background: ${Colors.GRAY2};
+              color: ${Colors.LIGHT_GRAY5};
+              .bp4-dark & {
+                background: ${Colors.BLACK};
+                color: ${Colors.DARK_GRAY5};
+              }
+            `}
           />
         : selectedTabID !== 'illustrations'
           ? <AsciidocPreview
               data={asciidocPreview ?? entryDataResp.value?.[selectedTabID]?.body ?? '(Nothing to preview)'}
-              css={css`flex: 1; overflow-y: auto; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
+              css={css`
+                flex: 1;
+                overflow-y: auto;
+                padding: 20px;
+                background: ${Colors.LIGHT_GRAY4};
+                .bp4-dark & {
+                  background: ${Colors.DARK_GRAY4};
+                }
+              `}
             />
           : <NonIdealState
-              css={css`flex: 1; padding: 20px; background: ${Colors.LIGHT_GRAY4};`}
-              icon="star-empty"
+              css={css`
+                flex: 1;
+                padding: 20px;
+                background: ${Colors.LIGHT_GRAY4};
+                .bp4-dark & {
+                  background: ${Colors.DARK_GRAY4};
+                }
+              `}
+              wcon="star-empty"
               title="Nothing to preview" />}
 
     </Card>

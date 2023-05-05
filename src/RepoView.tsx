@@ -91,6 +91,9 @@ function () {
     <LangContext.Provider value={{ selected: state.langID }}>
       <div css={css`
           background: ${Colors.LIGHT_GRAY2};
+          .bp4-dark & {
+            background: ${Colors.DARK_GRAY2};
+          }
           position: absolute; inset: 0;
           overflow: hidden;
           display: flex; flex-flow: row nowrap;`}>
