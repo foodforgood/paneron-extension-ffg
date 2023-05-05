@@ -141,7 +141,7 @@ function () {
           </nav>
         : null
     ),
-    [state.categoryID, state.entrySlug, handleSetLanguage, categories],
+    [state.categoryID, state.langID, state.entrySlug, handleSetLanguage, categories],
   );
 
   return (
