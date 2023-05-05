@@ -100,9 +100,11 @@ function () {
           display: flex; flex-flow: row nowrap;`}>
 
         <div css={css`flex: 1; padding: 10px; display: flex; flex-flow: column nowrap; overflow: hidden;`}>
+
           <Breadcrumbs
             css={css`flex: 0; margin-bottom: 10px; white-space: nowrap;`}
-            items={breadcrumbItems} />
+            items={breadcrumbItems}
+          />
 
           {state.entrySlug
             ? <EntryForm
