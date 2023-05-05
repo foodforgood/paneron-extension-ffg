@@ -24,6 +24,7 @@ const EntryCount: React.FC<{
       <Tag
           large={large}
           intent={nonZeroIntent && idx.value.count > 0 ? nonZeroIntent : undefined}
+          title={drafts ? "Number of draft entries" : undefined}
           className={className}>
         {idx.value.count}
       </Tag>
