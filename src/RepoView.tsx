@@ -58,7 +58,7 @@ function stateReducer(prevState: State, action: Action) {
     default:
       throw new Error("Unexpected state");
   }
-};
+}
 
 
 const RepositoryView: React.VoidFunctionComponent<Record<never, never>> =
