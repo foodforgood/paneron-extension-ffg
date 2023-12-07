@@ -115,13 +115,13 @@ const LocalizedEntryForm: React.FC<{
       </ActionButton>
     </div>
   );
-}
+};
 
 
 const FormGroup = styled(BaseFormGroup)`
   margin-bottom: 5px;
   padding: 0 10px;
-`
+`;
 
 
 export default LocalizedEntryForm;
