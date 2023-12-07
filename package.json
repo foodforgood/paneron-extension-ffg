@@ -1,6 +1,6 @@
 {
   "name": "@riboseinc/paneron-extension-ffg",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Paneron extension for managing FFG site data",
   "main": "plugin.js",
   "repository": "https://github.com/riboseinc/paneron-extension-ffg",
