@@ -8,7 +8,7 @@ import { BreadcrumbProps, Button, Classes, Colors, Menu, MenuDivider, MenuItem }
 import { Breadcrumbs2 as Breadcrumbs } from '@blueprintjs/popover2';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
-import { PersistentStateReducerHook } from '@riboseinc/paneron-extension-kit/usePersistentStateReducer';
+import type { PersistentStateReducerHook } from '@riboseinc/paneron-extension-kit/usePersistentStateReducer';
 
 import { categories, type LanguageID, languages } from './typeconst';
 import EntryCount from './entries/EntryCount';
