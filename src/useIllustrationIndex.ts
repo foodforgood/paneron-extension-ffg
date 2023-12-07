@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
-import { ValueHook } from '@riboseinc/paneron-extension-kit/types';
+import type { ValueHook } from '@riboseinc/paneron-extension-kit/types';
 import { getIlloQueryExp } from './query';
 
 
