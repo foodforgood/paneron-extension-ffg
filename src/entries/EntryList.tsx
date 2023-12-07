@@ -8,7 +8,7 @@ import { Button, Tag } from '@blueprintjs/core';
 import { Popover2 } from '@blueprintjs/popover2';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
-import makeSearchResultList from '@riboseinc/paneron-extension-kit/widgets/SearchResultList';
+import { makeSearchResultList } from '@riboseinc/paneron-extension-kit';
 
 import fm from '../frontmatter';
 import LangContext from '../LangContext';

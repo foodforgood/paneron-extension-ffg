@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import { Button } from '@blueprintjs/core';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
-import makeSearchResultList from '@riboseinc/paneron-extension-kit/widgets/SearchResultList';
+import { makeSearchResultList } from '@riboseinc/paneron-extension-kit';
 
 import { getIlloQueryExp } from '../query';
 import ActionButton from '../common/ActionButton';
