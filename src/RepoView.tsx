@@ -28,6 +28,38 @@ interface State {
   entrySlug: string | null
 }
 
+const initialState: State = {
+  categoryID: categories[0],
+  langID: languages[0],
+  entrySlug: null,
+} as const;
+
+function stateReducer(prevState: State, action: Action) {
+  switch (action.type) {
+    case 'select-category':
+      return {
+        ...prevState,
+        categoryID: action.payload.id,
+      }
+    case 'select-entry':
+      if (prevState.categoryID) {
+        return {
+          ...prevState,
+          entrySlug: action.payload.slug,
+        }
+      } else {
+        return prevState;
+      }
+    case 'select-language':
+      return {
+        ...prevState,
+        langID: action.payload.id,
+      }
+    default:
+      throw new Error("Unexpected state");
+  }
+};
+
 
 const RepositoryView: React.VoidFunctionComponent<Record<never, never>> =
 function () {
@@ -38,36 +70,8 @@ function () {
     'item-browser',
     undefined,
     undefined,
-    (prevState, action) => {
-      switch (action.type) {
-        case 'select-category':
-          return {
-            ...prevState,
-            categoryID: action.payload.id,
-          }
-        case 'select-entry':
-          if (prevState.categoryID) {
-            return {
-              ...prevState,
-              entrySlug: action.payload.slug,
-            }
-          } else {
-            return prevState;
-          }
-        case 'select-language':
-          return {
-            ...prevState,
-            langID: action.payload.id,
-          }
-        default:
-          throw new Error("Unexpected state");
-      }
-    },
-    {
-      categoryID: categories[0],
-      langID: languages[0],
-      entrySlug: null,
-    },
+    stateReducer,
+    initialState,
     null);
 
   const handleSetLanguage = useCallback(function _handleSetLanguage(langID: LanguageID) {
