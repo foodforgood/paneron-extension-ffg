@@ -2,7 +2,7 @@
 /** @jsxFrag React.Fragment */
 
 import format from 'date-fns/format';
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 import { Button, Tag } from '@blueprintjs/core';
 import { Popover2 } from '@blueprintjs/popover2';
@@ -22,7 +22,7 @@ const EntryList: React.VoidFunctionComponent<{
   onOpen?: (slug: string) => void
   className?: string
 }> = function ({ categoryID, drafts, onOpen, className }) {
-  const langCtx = useContext(LangContext);
+  const langCtx = React.useContext(LangContext);
 
   const queryExpression = getEntryQueryExp({
     categoryID,
@@ -30,7 +30,7 @@ const EntryList: React.VoidFunctionComponent<{
     langID: langCtx.selected,
   });
 
-  const [ selectedItemPath, selectItemPath ] = useState<string | null>(null);
+  const [ selectedItemPath, selectItemPath ] = React.useState<string | null>(null);
 
   return (
     <SearchResultList
@@ -49,7 +49,7 @@ export default EntryList;
 
 const EntryItem: React.FC<{ objectData: { asText: string }, objectPath: string }> =
 function ({ objectData, objectPath }) {
-  const { updateTree, performOperation } = useContext(DatasetContext);
+  const { updateTree, performOperation } = React.useContext(DatasetContext);
   const slug = objectPath.split('/')[2];
   const { date, title } = parseEntrySlug(slug);
 

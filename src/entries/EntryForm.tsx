@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -34,14 +34,14 @@ const EntryForm: React.VoidFunctionComponent<{
   className?: string
 }> = function ({ categoryID, entrySlug, onChangeLanguage, className }) {
   const entryDataResp = useEntryData(categoryID, entrySlug);
-  const langCtx = useContext(LangContext);
-  const { performOperation, updateObjects } = useContext(DatasetContext);
+  const langCtx = React.useContext(LangContext);
+  const { performOperation, updateObjects } = React.useContext(DatasetContext);
 
-  const [ selectedTabID, selectTab ] = useState<ValidTabID>(langCtx.selected);
-  const [ selectedIllustration, selectIllustration ] = useState<string | null>(null);
-  const [ asciidocPreview, setAsciidocPreview ] = useState<string | null>(null);
+  const [ selectedTabID, selectTab ] = React.useState<ValidTabID>(langCtx.selected);
+  const [ selectedIllustration, selectIllustration ] = React.useState<string | null>(null);
+  const [ asciidocPreview, setAsciidocPreview ] = React.useState<string | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setAsciidocPreview(null);
     if (selectedTabID !== 'illustrations' && onChangeLanguage) {
       onChangeLanguage(selectedTabID);

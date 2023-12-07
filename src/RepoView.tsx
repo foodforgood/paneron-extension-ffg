@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useContext, useMemo, useCallback } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 
 import { BreadcrumbProps, Button, Classes, Colors, Menu, MenuDivider, MenuItem } from '@blueprintjs/core';
@@ -63,7 +63,7 @@ function stateReducer(prevState: State, action: Action) {
 
 const RepositoryView: React.VoidFunctionComponent<Record<never, never>> =
 function () {
-  const { usePersistentDatasetStateReducer } = useContext(DatasetContext);
+  const { usePersistentDatasetStateReducer } = React.useContext(DatasetContext);
 
   const [ state, dispatch ] =
   (usePersistentDatasetStateReducer as PersistentStateReducerHook<State, Action>)(
@@ -74,7 +74,7 @@ function () {
     initialState,
     null);
 
-  const handleSetLanguage = useCallback(function _handleSetLanguage(langID: LanguageID) {
+  const handleSetLanguage = React.useCallback(function _handleSetLanguage(langID: LanguageID) {
     dispatch({
       type: 'select-language',
       payload: { id: langID },
@@ -98,7 +98,7 @@ function () {
     })
   }
 
-  const nav = useMemo(
+  const nav = React.useMemo(
     (() =>
       !state.entrySlug
         ? <nav css={css`flex: 0; padding: 10px;`}>

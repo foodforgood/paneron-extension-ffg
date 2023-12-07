@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 import { Button } from '@blueprintjs/core';
 
@@ -19,7 +19,7 @@ const IllustrationList: React.VoidFunctionComponent<{
   onSelect: (filename: string | null) => void
   className?: string
 }> = function ({ categoryID, entrySlug, selected, onSelect, className }) {
-  const { addFromFilesystem, performOperation, operationKey } = useContext(DatasetContext);
+  const { addFromFilesystem, performOperation, operationKey } = React.useContext(DatasetContext);
 
   const queryExpression = getIlloQueryExp(
     categoryID,
@@ -63,7 +63,7 @@ export default IllustrationList;
 const Illustration: React.FC<{ objectData: any, objectPath: string }> =
 function ({ objectPath }) {
   const filename = objectPath.split('/')[3];
-  const { updateObjects, performOperation } = useContext(DatasetContext);
+  const { updateObjects, performOperation } = React.useContext(DatasetContext);
 
   async function _handleDelete() {
     if (updateObjects) {

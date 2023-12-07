@@ -3,7 +3,7 @@
 
 import update from 'immutability-helper';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -22,7 +22,7 @@ const LocalizedEntryForm: React.FC<{
   className?: string
 }> = function ({ objectData, creating, onCommit, onChange, className }) {
   const [editedData, setEdited] =
-    useState<BodyWithFrontmatter<EntryFrontmatter> | null>(null);
+    React.useState<BodyWithFrontmatter<EntryFrontmatter> | null>(null);
 
   const data = editedData ?? objectData;
 
@@ -32,7 +32,7 @@ const LocalizedEntryForm: React.FC<{
 
   const canCommit = editedData !== null && JSON.stringify(objectData) !== JSON.stringify(editedData);
 
-  useEffect(() => {
+  React.useEffect(() => {
     onChange?.(editedData);
   }, [JSON.stringify(editedData)]);
 

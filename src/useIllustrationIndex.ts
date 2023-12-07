@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React from 'react';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 import { ValueHook } from '@riboseinc/paneron-extension-kit/types';
@@ -7,7 +7,7 @@ import { getIlloQueryExp } from './query';
 
 export default function useIllustrationIndex(categoryID: string, entrySlug: string):
 ValueHook<{ count: number, indexID: string }> {
-  const { useFilteredIndex, useIndexDescription } = useContext(DatasetContext);
+  const { useFilteredIndex, useIndexDescription } = React.useContext(DatasetContext);
 
   const queryExpression = getIlloQueryExp(categoryID, entrySlug);
 

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { jsx } from '@emotion/react';
 import { Intent, Tag } from '@blueprintjs/core';
 import useEntryIndex from '../useEntryIndex';
@@ -16,7 +16,7 @@ const EntryCount: React.FC<{
   className?: string
   large?: true
 }> = function ({ categoryID, drafts, nonZeroOnly, nonZeroIntent, large, className }) {
-  const langCtx = useContext(LangContext);
+  const langCtx = React.useContext(LangContext);
   const idx = useEntryIndex({ categoryID, langID: langCtx.selected, draft: drafts });
 
   if (idx.value.count > 0 || !nonZeroOnly) {

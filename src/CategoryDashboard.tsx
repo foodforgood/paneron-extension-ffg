@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 
 import { Button, H5, InputGroup } from '@blueprintjs/core';
@@ -23,8 +23,8 @@ const CategoryDashboard: React.VoidFunctionComponent<{
   onOpenEntry?: (slug: string) => void
   className?: string
 }> = function ({ categoryID, onOpenEntry, onChangeLanguage, className }) {
-  const [ archiveExpanded, setArchiveExpanded ] = useState<boolean>(false);
-  const [ newEntrySlug, setNewEntrySlug ] = useState('');
+  const [ archiveExpanded, setArchiveExpanded ] = React.useState<boolean>(false);
+  const [ newEntrySlug, setNewEntrySlug ] = React.useState('');
 
   function handleToggleArchive() {
     setArchiveExpanded(state => !state);

@@ -1,5 +1,5 @@
 
-import { useContext } from 'react';
+import React from 'react';
 
 import { DatasetContext } from '@riboseinc/paneron-extension-kit/context';
 import { ValueHook } from '@riboseinc/paneron-extension-kit/types';
@@ -16,7 +16,7 @@ function getObjectPathForLanguage(categoryID: string, entrySlug: string, langID:
 
 export default function useEntryData(categoryID: string, entrySlug: string):
 ValueHook<EntryData | null> {
-  const { useObjectData } = useContext(DatasetContext);
+  const { useObjectData } = React.useContext(DatasetContext);
 
   const objectPaths = languages.map(langID => getObjectPathForLanguage(categoryID, entrySlug, langID));
 
