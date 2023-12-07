@@ -1,7 +1,8 @@
 import { makeExtension } from '@riboseinc/paneron-extension-kit';
+import RepoView from './RepoView';
 
 export default makeExtension({
-  mainView: () => import('./RepoView'),
+  mainView: RepoView,
   name: "Food For Good",
-  requiredHostAppVersion: '^2.0.0',
+  requiredHostAppVersion: '^2.2.0',
 });
